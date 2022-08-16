@@ -10,7 +10,6 @@ public class AddressBookMain {
         long phoneNo;
         char option;
         ArrayList<AddressBook> contactArr = new ArrayList<AddressBook>();
-
         Scanner sc = new Scanner(System.in);
         do {
             AddressBook contact = new AddressBook();
@@ -38,26 +37,25 @@ public class AddressBookMain {
             System.out.print("\nEnter Zip  : ");
             zip = sc.nextInt();
             contact.setZip(zip);
-            contactArr.add(contact);
-            System.out.print(
-                    "\nDo you want to add one more contact? press Y / N : ");
+            Operate operate = new Operate();
+            operate.storeContact(firstName, contact);
+            System.out.print("\nDo you want to add one more contact? press Y / N : ");
             option = sc.next().charAt(0);
             sc.nextLine();
         } while (option == 'Y');
-
         Operate operate = new Operate();
         System.out.print("\nDo you want to edit? press Y / N : ");
         char editOption = sc.next().charAt(0);
         if (editOption == 'Y') {
-            operate.editContact(contactArr);
+            operate.editContact();
         }
-        operate.showContact(contactArr);
+        operate.showContact();
         System.out.print("\nDo you want to delete? press Y / N : ");
         char deleteOption = sc.next().charAt(0);
         if (deleteOption == 'Y') {
-            contactArr = operate.deleteContact(contactArr);
+            operate.deleteContact();
         }
-        operate.showContact(contactArr);
+        operate.showContact();
         sc.close();
     }
 }
